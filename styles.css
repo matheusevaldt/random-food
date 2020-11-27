@@ -1,0 +1,52 @@
+*, 
+*::before, 
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+*:focus {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+input,
+button {
+    font-family: 'Poppins', sans-serif;
+}
+
+header {
+    background-color: #f38181;
+    padding: 40px 10px;
+}
+
+header h1 {
+    color: #fffafa;
+    font-size: 2em;
+    font-family: 'Dancing Script', cursive;
+}
+
+.button-add-food-enabled {
+    border: 1px solid red;
+}
+
+.list-of-foods {
+    list-style: none;
+}
+
+.list-of-foods li {
+    display: inline;
+}
