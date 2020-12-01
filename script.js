@@ -6,6 +6,7 @@ const amountOfFoods = document.querySelector('.amount-of-foods');
 const listOfFoods = document.querySelector('.list-of-foods');
 const buttonGetFood = document.querySelector('.button-get-food');
 const foodSelected = document.querySelector('.food-selected');
+const loadingSpinner = document.querySelector('.loading-spinner');
 
 let foods = [];
 let idFood = 0;
@@ -21,6 +22,7 @@ buttonGetFood.addEventListener('click', getFood);
 function displayAddFood() {
     buttonDisplayAddFood.style.display = 'none';
     formAddFood.style.display = 'block';
+    inputAddFood.focus();
 }
 
 function statusButtonAddFood() {
@@ -37,6 +39,7 @@ function addFood() {
     const food = inputAddFood.value;
     foods.push({id: idFood, food: food});
     idFood++;
+    inputAddFood.focus();
     updateAmountOfFoods();
     updateListOfFoods();
     resetAddFood();
@@ -54,14 +57,11 @@ function updateListOfFoods() {
         const li = document.createElement('li');
         const food = `<span class="food-highlight">${name.food}</span>`;
         const period = foods.length - 1 === index ? '.' : '';
+        const separation = foods.length - 1 === index ? ' and ' : ', ';
         if (index === 0) {
             li.innerHTML = `${food}${period}`;
         } else {
-            if (foods.length - 1 === index) {
-                li.innerHTML = ` and ${food}${period}`;
-            } else {
-                li.innerHTML = `, ${food}${period}`;
-            }
+            li.innerHTML = `${separation}${food}${period}`;
         }
         listOfFoods.appendChild(li);
     });
@@ -81,19 +81,44 @@ function resetAddFood() {
 
 function displayGetFoodButton() {
     buttonGetFood.style.display = 'block';
-    console.log('DISPLAY GET FOOD BUTTON');
 }
 
-function getFood() {
-    shuffleFoods();
-    // const food = foods[Math.floor(Math.random() * foods.length)];
-    // console.log(food.food);
+async function getFood() {
+    await shuffleFoods();
+    await loadFoodSelected();
+    await displayFoodSelected();
 }
 
-function shuffleFoods() {
-    for (let i = 0; i < foods.length; i++) {
+async function shuffleFoods() {
+    await new Promise(resolve => {
+        for (let i = 0; i < foods.length; i++) {
+            setTimeout(() => {
+                foodSelected.innerHTML = foods[i].food;
+                console.log(foods[i].food);
+                foodSelected.classList.add('a');
+                setTimeout(() => foodSelected.classList.remove('a'), 900)
+                if (i === foods.length - 1) resolve();
+            }, i * 1000);
+        }
+    });
+}
+
+async function loadFoodSelected() {
+    await new Promise(resolve => {
         setTimeout(() => {
-            foodSelected.innerHTML = foods[i].food;
-        }, i * 2000);
-    }
+            loadingSpinner.style.display = 'block';
+            resolve();
+        }, 1500); // Execute this function 1500ms after the previous function has ended.
+    });
+}
+
+async function displayFoodSelected() {
+    await new Promise(resolve => {
+        setTimeout(() => {
+            loadingSpinner.style.display = 'none';
+            const food = foods[Math.floor(Math.random() * foods.length)];
+            foodSelected.innerHTML = `The food that has been selected is: ${food.food}`;
+            resolve();
+        }, 2000);
+    });
 }
