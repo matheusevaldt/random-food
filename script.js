@@ -5,6 +5,7 @@ const buttonAddFood = document.querySelector('.button-add-food');
 const amountOfFoods = document.querySelector('.amount-of-foods');
 const listOfFoods = document.querySelector('.list-of-foods');
 const buttonGetFood = document.querySelector('.button-get-food');
+const buttonOpenEditFoods = document.querySelector('.button-open-edit-foods');
 const foodSelected = document.querySelector('.food-selected');
 const loadingSpinner = document.querySelector('.loading-spinner');
 
@@ -18,6 +19,7 @@ inputAddFood.addEventListener('input', statusButtonAddFood);
 buttonAddFood.addEventListener('click', event => event.preventDefault());
 buttonAddFood.addEventListener('click', addFood);
 buttonGetFood.addEventListener('click', getFood);
+buttonOpenEditFoods.addEventListener('click', openEditFoods);
 
 function displayAddFood() {
     buttonDisplayAddFood.style.display = 'none';
@@ -122,3 +124,61 @@ async function displayFoodSelected() {
         }, 2000);
     });
 }
+
+
+const wrapperEditFoods = document.querySelector('.wrapper-edit-foods');
+const contentEditFoods = document.querySelector('.content-edit-foods');
+const editableFoods = document.querySelector('.editable-foods');
+const buttonCloseEditFoods = document.querySelector('.button-close-edit-foods');
+
+editableFoods.addEventListener('click', editFoods);
+buttonCloseEditFoods.addEventListener('click', closeEditFoods);
+
+function openEditFoods() {
+    wrapperEditFoods.classList.add('display-edit-foods');
+    displayEditableFoods();
+}
+
+function closeEditFoods() {
+    wrapperEditFoods.classList.remove('display-edit-foods');
+    updateAmountOfFoods();
+    updateListOfFoods();
+}
+
+function displayEditableFoods() {
+    while (editableFoods.firstChild) editableFoods.removeChild(editableFoods.firstChild);
+    foods.forEach(food => createEditableFoods(food.id, food.food));
+    console.log(foods);
+}
+
+function createEditableFoods(id, food) {
+    console.log(food);
+    const content = `
+    <li id="${id}">
+        <input type="text" class="input-rename-food" value="${food}" >
+        <button class="button-delete-food">X</button>
+    </li>
+    `;
+    editableFoods.insertAdjacentHTML('beforeend', content);
+}
+
+function editFoods(event) {
+    const element = event.target;
+    const elementId = element.parentElement.id;
+    const interaction = JSON.stringify(element.classList);
+    console.log(element);
+    console.log(elementId);
+    if (interaction.includes('button-delete-food')) {
+        foods.splice(elementId, 1);
+        displayEditableFoods();
+    }
+}
+
+
+// const inputRenameFood = document.querySelector('.input-rename-food');
+
+// inputRenameFood.addEventListener('input', renameFood);
+
+// function renameFood() {
+//     console.log('MUDOU');
+// }

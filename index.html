@@ -12,6 +12,11 @@
 </head>
 <body>
 
+    <!-- 
+        https://css-tricks.com/making-css-animations-feel-natural/
+        https://stackoverflow.com/questions/51275801/continuous-async-await-with-settimeout
+     -->
+
     <header>
         <h1>What would you like to eat?</h1>
     </header>
@@ -27,9 +32,22 @@
     <ul class="list-of-foods"></ul>
 
     <button class="button-get-food">GET FOOD</button>
+    <button class="button-open-edit-foods">EDIT FOODS</button>
 
     <p class="food-selected"></p>
     <div class="loading-spinner"></div>
 
+    <div class="wrapper-edit-foods">
+        <div class="content-edit-foods">
+            <h1>You can delete or edit the foods that you have added to the list.</h1>
+            <ul class="editable-foods">
+                <li>
+                    <input type="text" class="input-rename-food" value="">
+                    <button class="button-delete-food">X</button>
+                </li>
+            </ul>
+        </div>
+        <button class="button-close-edit-foods">CLOSE</button>
+    </div>
 </body>
 </html>
