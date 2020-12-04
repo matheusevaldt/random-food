@@ -4,6 +4,7 @@ const inputAddFood = document.querySelector('.input-add-food');
 const buttonAddFood = document.querySelector('.button-add-food');
 const amountOfFoods = document.querySelector('.amount-of-foods');
 const listOfFoods = document.querySelector('.list-of-foods');
+const actionButtons = document.querySelector('.action-buttons');
 const buttonGetFood = document.querySelector('.button-get-food');
 const buttonOpenEditFoods = document.querySelector('.button-open-edit-foods');
 const foodSelected = document.querySelector('.food-selected');
@@ -23,8 +24,8 @@ buttonOpenEditFoods.addEventListener('click', openEditFoods);
 
 function displayAddFood() {
     buttonDisplayAddFood.style.display = 'none';
-    formAddFood.style.display = 'block';
-    inputAddFood.focus();
+    formAddFood.style.display = 'grid';
+    if (screen.width > 1300) inputAddFood.focus();
 }
 
 function statusButtonAddFood() {
@@ -45,12 +46,16 @@ function addFood() {
     updateAmountOfFoods();
     updateListOfFoods();
     resetAddFood();
-    if (foods.length === 1) displayGetFoodButton();
+    if (foods.length === 1) {
+        displayActionButtons();
+        amountOfFoods.style.color = '#0E101A';
+        amountOfFoods.style.fontSize = '1em';
+    }
 }
 
 function updateAmountOfFoods() {
-    const amount = foods.length === 1 ? 'food' : 'foods';
-    amountOfFoods.innerHTML = `You have added ${foods.length} ${amount} so far.`;
+    const amount = foods.length === 1 ? 'food has' : 'foods have';
+    amountOfFoods.innerHTML = `${foods.length} ${amount} been added.`;
 }
 
 function updateListOfFoods() {
@@ -81,8 +86,8 @@ function resetAddFood() {
     buttonAddFood.classList.remove('button-add-food-enabled')
 }
 
-function displayGetFoodButton() {
-    buttonGetFood.style.display = 'block';
+function displayActionButtons() {
+    actionButtons.style.display = 'flex';
 }
 
 async function getFood() {
@@ -186,6 +191,11 @@ function editFoods(event) {
 
 window.addEventListener('click', event => {
     const element = event.target;
+    if (element === wrapperEditFoods) closeEditFoods();
+})
+
+window.addEventListener('click', event => {
+    const element = event.target;
     const interaction = JSON.stringify(element.classList);
     const isMobileDevice = window.navigator.userAgent.toLowerCase().includes('mobi');
     if (isMobileDevice) {
@@ -198,3 +208,9 @@ window.addEventListener('click', event => {
         }
     }
 });
+
+function fixViewHeightOnMobile() {
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+}
+
+fixViewHeightOnMobile();

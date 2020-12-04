@@ -19,8 +19,14 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+:root {
+    --black-color-text: #0E101A;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
 }
 
 input,
@@ -29,27 +35,111 @@ button {
 }
 
 header {
-    background-color: #f38181;
-    padding: 40px 10px;
+    /* background-color: #f38181; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #9f5f80;
+    height: 150px;
 }
 
 header h1 {
     color: #fffafa;
-    font-size: 2em;
+    font-size: 2.3em;
     font-family: 'Dancing Script', cursive;
 }
 
+main {
+    position: relative;
+    top: -40px;
+    height: calc((var(--vh, 1vh) * 100) - 110px);
+    border-bottom: 1px solid red;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.button-display-add-food {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 5px solid #5f2d47;
+    background-color: #9f5f80;
+    color: #fffafa;
+    font-size: 3.5em;
+    font-weight: 700;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.button-display-add-food::before {
+    content: '+';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-top: 1px;
+    padding-left: 1px;
+}
+
+.amount-of-foods {
+    color: #9e9e9e;
+    margin-top: 12px;
+    font-size: 0.9em;
+}
+
 .form-add-food {
-    border: 1px solid red;
     display: none;
+    grid-template-columns: 85% 15%;
+    width: 100%;
+}
+
+.form-add-food input {
+    padding: 10px;
+    font-size: 0.9em;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-right: none;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.button-add-food {
+    position: relative;
+    padding: 10px;
+    font-size: 1.8em;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #fffafa;
+    border: 1px solid transparent;
+    border-left: none;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    transition: all 0.3s linear;
+}
+
+.button-add-food::before {
+    content: '+';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-top: 1px;
+    padding-left: 1px;
 }
 
 .button-add-food-enabled {
-    border: 1px solid red;
+    background-color: #9f5f80;
 }
 
 .list-of-foods {
     list-style: none;
+    color: var(--black-color-text);
 }
 
 .list-of-foods li {
@@ -61,20 +151,30 @@ header h1 {
     font-weight: 700;
 }
 
-.button-get-food {
+.action-buttons {
+    margin-top: 12px;
     display: none;
-    padding: 10px 15px;
+}
+
+.button-get-food,
+.button-open-edit-foods {
+    padding: 10px 0;
+    width: 110px;
     border: none;
-    border-bottom: 4px solid #070d59;
+    border-bottom: 4px solid #5f2d47;
     border-radius: 5px;
     font-weight: 0.9em;
     font-weight: 700;
-    background-color: #07689f;
+    background-color: #9f5f80;
     color: #fffafa;
 }
 
+.button-get-food {
+    margin-right: 12px;
+}
+
 .food-selected {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 
 .a {
@@ -118,11 +218,6 @@ header h1 {
 
 
 
-
-
-
-
-
 .wrapper-edit-foods {
     display: none;
     position: absolute;
@@ -131,7 +226,7 @@ header h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .display-edit-foods {
@@ -144,6 +239,8 @@ header h1 {
     color: #fffafa;
     height: 80vh;
     padding: 30px 20px 0 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .edit-foods-info {
@@ -168,6 +265,7 @@ header h1 {
     overflow-y: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    padding-left: 15px;
 }
 
 .editable-foods::-webkit-scrollbar {
