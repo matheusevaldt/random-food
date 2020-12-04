@@ -125,7 +125,6 @@ header h1 {
 
 .wrapper-edit-foods {
     display: none;
-    border: 1px solid;
     position: absolute;
     z-index: 2;
     top: 0;
@@ -140,17 +139,78 @@ header h1 {
 }
 
 .content-edit-foods {
-    background-color: #ffe4c4;
-    color: #0f0f0f;
-    height: 70vh;
-    overflow-y: auto;
-    padding: 20px;
+    position: relative;
+    background-color: #9f5f80;
+    color: #fffafa;
+    height: 80vh;
+    padding: 30px 20px 0 20px;
 }
 
-.content-edit-foods h1 {
-    font-size: 1em;
+.edit-foods-info {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.edit-foods-info h1 {
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.edit-foods-info h2 {
+    font-size: 0.9em;
+    font-weight: 400;
 }
 
 .editable-foods {
-    border: 1px solid;
+    list-style: none;
+    max-height: 45vh;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.editable-foods::-webkit-scrollbar {
+    display: none;
+}
+
+.editable-foods li {
+    margin-bottom: 12px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 85% 15%;
+}
+
+.editable-foods li:last-of-type {
+    margin-bottom: 0;
+}
+
+.input-rename-food {
+    padding: 6px 10px;
+    font-size: 0.9em;
+    background-color: #ffffff;
+    border: 3px solid #5f2d47;
+    border-radius: 5px;
+}
+
+.button-delete-food {
+    border: none;
+    background-color: transparent;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #fffafa;
+}
+
+.button-close-edit-foods {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-size: 0.9em;
+    font-weight: 700;
+    border: 2px solid #fffafa;
+    background-color: #5f2d47;
+    color: #fffafa;
 }

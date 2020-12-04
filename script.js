@@ -156,7 +156,7 @@ function createEditableFoods(id, food) {
     const content = `
     <li id="${id}">
         <input type="text" class="input-rename-food" value="${food}" >
-        <button class="button-delete-food">X</button>
+        <button class="button-delete-food">&times;</button>
     </li>
     `;
     editableFoods.insertAdjacentHTML('beforeend', content);
@@ -166,19 +166,35 @@ function editFoods(event) {
     const element = event.target;
     const elementId = element.parentElement.id;
     const interaction = JSON.stringify(element.classList);
-    console.log(element);
-    console.log(elementId);
     if (interaction.includes('button-delete-food')) {
         foods.splice(elementId, 1);
         displayEditableFoods();
     }
+    if (interaction.includes('input-rename-food')) {
+        const inputRenameFood = document.querySelectorAll('.input-rename-food');
+        for (let i = 0; i < inputRenameFood.length; i++) {
+            inputRenameFood[i].addEventListener('input', () => {
+                const newValue = event.target.value;
+                console.log(newValue);
+                foods.find(food => {
+                    if (food.id == elementId) food.food = newValue;
+                });
+            });
+        }
+    }
 }
 
-
-// const inputRenameFood = document.querySelector('.input-rename-food');
-
-// inputRenameFood.addEventListener('input', renameFood);
-
-// function renameFood() {
-//     console.log('MUDOU');
-// }
+window.addEventListener('click', event => {
+    const element = event.target;
+    const interaction = JSON.stringify(element.classList);
+    const isMobileDevice = window.navigator.userAgent.toLowerCase().includes('mobi');
+    if (isMobileDevice) {
+        if (interaction.includes('input-rename-food')) {
+            buttonCloseEditFoods.style.display = 'none';
+            contentEditFoods.style.height = '100vh';
+        } else {
+            buttonCloseEditFoods.style.display = 'block';
+            contentEditFoods.style.height = '80vh';
+        }
+    }
+});
