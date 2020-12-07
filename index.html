@@ -24,26 +24,35 @@
     <main>
 
         <!-- 
-            create one separate div when user clicks in GET FOOD, hide the rest (also in a separate div)
-         -->
+            - create one separate div when user clicks in GET FOOD, hide the rest (also in a separate div) -- 50% done
+            - get food button with opacity (disabled) when there's only one food added. make it normal after 2 foods added
+        -->
 
-        <button class="button-display-add-food"></button>
-
-        <form class="form-add-food">
-            <input type="text" class="input-add-food" placeholder="Insert food">
-            <button class="button-add-food"></button>
-        </form>
-    
-        <p class="amount-of-foods">You haven't added any foods.</p>
-        <ul class="list-of-foods"></ul>
-    
-        <div class="action-buttons">
-            <button class="button-get-food">GET FOOD</button>
-            <button class="button-open-edit-foods">EDIT FOODS</button>
+        <div class="initial-container">
+            <button class="button-open-main-container">
+                <img src="images/add.png">
+            </button>
+            <p>You haven't added any foods. <br> Let's begin.</p>
         </div>
 
-        <p class="food-selected"></p>
-        <div class="loading-spinner"></div>
+        <div class="main-container">
+            <form class="form-add-food">
+                <input type="text" class="input-add-food" placeholder="Insert food">
+                <button class="button-add-food"></button>
+            </form>
+        
+            <p class="amount-of-foods">You haven't added any foods.</p>
+            <ul class="list-of-foods"></ul>
+        
+            <div class="action-buttons">
+                <button class="button-get-food">GET FOOD</button>
+                <button class="button-open-edit-foods">EDIT FOODS</button>
+            </div>
+    
+            <p class="food-selected"></p>
+            <div class="loading-spinner"></div>
+        </div>
+        
     </main>
 
     <div class="wrapper-edit-foods">

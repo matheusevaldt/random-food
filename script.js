@@ -1,4 +1,6 @@
-const buttonDisplayAddFood = document.querySelector('.button-display-add-food');
+const initialContainer = document.querySelector('.initial-container');
+const buttonOpenMainContainer = document.querySelector('.button-open-main-container');
+const mainContainer = document.querySelector('.main-container');
 const formAddFood = document.querySelector('.form-add-food');
 const inputAddFood = document.querySelector('.input-add-food');
 const buttonAddFood = document.querySelector('.button-add-food');
@@ -15,26 +17,26 @@ let idFood = 0;
 
 buttonAddFood.disabled = true;
 
-buttonDisplayAddFood.addEventListener('click', displayAddFood);
+buttonOpenMainContainer.addEventListener('click', openMainContainer);
 inputAddFood.addEventListener('input', statusButtonAddFood);
 buttonAddFood.addEventListener('click', event => event.preventDefault());
 buttonAddFood.addEventListener('click', addFood);
 buttonGetFood.addEventListener('click', getFood);
 buttonOpenEditFoods.addEventListener('click', openEditFoods);
 
-function displayAddFood() {
-    buttonDisplayAddFood.style.display = 'none';
-    formAddFood.style.display = 'grid';
+function openMainContainer() {
+    initialContainer.style.display = 'none';
+    mainContainer.style.display = 'block';
     if (screen.width > 1300) inputAddFood.focus();
 }
 
 function statusButtonAddFood() {
     if (inputAddFood.value.length !== 0) {
         buttonAddFood.disabled = false;
-        buttonAddFood.classList.add('button-add-food-enabled');
+        // buttonAddFood.classList.add('button-add-food-enabled');
     } else {
         buttonAddFood.disabled = true;
-        buttonAddFood.classList.remove('button-add-food-enabled')
+        // buttonAddFood.classList.remove('button-add-food-enabled');
     }
 }
 

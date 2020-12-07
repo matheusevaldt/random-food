@@ -34,6 +34,10 @@ button {
     font-family: 'Poppins', sans-serif;
 }
 
+button {
+    cursor: pointer;
+}
+
 header {
     /* background-color: #f38181; */
     display: flex;
@@ -63,59 +67,91 @@ main {
     text-align: center;
 }
 
-.button-display-add-food {
-    position: relative;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 5px solid #5f2d47;
-    background-color: #9f5f80;
-    color: #fffafa;
-    font-size: 3.5em;
-    font-weight: 700;
-    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
-}
-
-.button-display-add-food::before {
-    content: '+';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding-top: 1px;
-    padding-left: 1px;
-}
-
-.amount-of-foods {
-    color: #9e9e9e;
-    margin-top: 12px;
+.initial-container p {
+    margin-top: 20px;
     font-size: 0.9em;
+    color: #616161;
+}
+
+.main-container {
+    display: none;
+    /* border: 1px solid; */
+}
+
+
+
+
+.button-open-main-container {
+    position: relative;
+    z-index: 1;
+    border: none;
+    background-color: transparent;
+}
+
+.button-open-main-container img {
+    width: 100px;
+}
+
+.button-open-main-container::before {
+    content: '';
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    position: absolute;
+    z-index: -1;
+    top: 15px;
+    left: -15px;
+    /* background-color: rgba(173, 165, 165, 0.7); */
+    background-color: rgba(159, 95, 128, 0.8);
 }
 
 .form-add-food {
-    display: none;
+    display: grid;
     grid-template-columns: 85% 15%;
     width: 100%;
+    margin-bottom: 20px;
+    /* border: 1px solid; */
 }
 
-.form-add-food input {
-    padding: 10px;
+.form-add-food:hover .input-add-food,
+.input-add-food:focus {
+    border: 2px solid rgba(159, 95, 128, 0.8);
+    background-color: transparent;
+    border-right: none;
+}
+
+.form-add-food:hover .button-add-food,
+.form-add-food:focus .button-add-food,
+.input-add-food:focus + .button-add-food {
+    border: 2px solid rgba(159, 95, 128, 0.8);
+    background-color: transparent;
+    border-left: none;
+}
+
+.input-add-food {
+    padding: 12px 10px;
     font-size: 0.9em;
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 2px solid transparent;
     border-right: none;
     border-radius: 5px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    transition: all 0.3s linear;
+    position: relative;
+}
+
+.input-add-food::placeholder {
+    color: rgba(0, 0, 0, 0.7);
 }
 
 .button-add-food {
     position: relative;
-    padding: 10px;
+    padding: 12px 10px;
     font-size: 1.8em;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.15);
     color: #fffafa;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     border-left: none;
     border-radius: 5px;
     border-top-left-radius: 0;
@@ -128,13 +164,18 @@ main {
     position: absolute;
     top: 50%;
     left: 50%;
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 700;
     transform: translate(-50%, -50%);
-    padding-top: 1px;
-    padding-left: 1px;
 }
 
 .button-add-food-enabled {
     background-color: #9f5f80;
+}
+
+.amount-of-foods {
+    color: #616161;
+    font-size: 0.9em;
 }
 
 .list-of-foods {
@@ -152,25 +193,40 @@ main {
 }
 
 .action-buttons {
-    margin-top: 12px;
+    margin-top: 25px;
     display: none;
-}
-
-.button-get-food,
-.button-open-edit-foods {
-    padding: 10px 0;
-    width: 110px;
-    border: none;
-    border-bottom: 4px solid #5f2d47;
-    border-radius: 5px;
-    font-weight: 0.9em;
-    font-weight: 700;
-    background-color: #9f5f80;
-    color: #fffafa;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid; */
 }
 
 .button-get-food {
-    margin-right: 12px;
+    padding: 10px 25px;
+    border: none;
+    border-bottom: 4px solid #00465e;
+    border-radius: 5px;
+    font-weight: 0.9em;
+    font-weight: 700;
+    background-color: #008CBA;
+    color: #fffafa;
+    margin-bottom: 10px;
+    transition: background-color 0.3s linear;
+}
+
+.button-get-food:hover {
+    background-color: rgba(0, 140, 186, 0.8);
+}
+
+.button-open-edit-foods {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    color: #616161;
+}
+
+.button-open-edit-foods:hover {
+    text-decoration: underline;
 }
 
 .food-selected {
