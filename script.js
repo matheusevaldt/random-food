@@ -11,7 +11,10 @@ const buttonGetFood = document.querySelector('.button-get-food');
 const buttonOpenEditFoods = document.querySelector('.button-open-edit-foods');
 const foodSelected = document.querySelector('.food-selected');
 const loadingSpinner = document.querySelector('.loading-spinner');
+const buttonOpenAbout = document.querySelector('.button-open-about');
+const notification = document.querySelector('.notification');
 
+let currentNotification;
 let foods = [];
 let idFood = 0;
 
@@ -23,6 +26,7 @@ buttonAddFood.addEventListener('click', event => event.preventDefault());
 buttonAddFood.addEventListener('click', addFood);
 buttonGetFood.addEventListener('click', getFood);
 buttonOpenEditFoods.addEventListener('click', openEditFoods);
+buttonOpenAbout.addEventListener('click', openAbout);
 
 function openMainContainer() {
     initialContainer.style.display = 'none';
@@ -49,10 +53,11 @@ function addFood() {
     updateListOfFoods();
     resetAddFood();
     if (foods.length === 1) {
-        displayActionButtons();
+        actionButtons.style.display = 'flex';
         amountOfFoods.style.color = '#0E101A';
-        amountOfFoods.style.fontSize = '1em';
-    }
+        buttonGetFood.style.backgroundColor = 'rgba(0, 140, 186, 0.6)';
+    } 
+    if (foods.length === 2) buttonGetFood.style.backgroundColor = 'rgba(0, 140, 186, 1)';
 }
 
 function updateAmountOfFoods() {
@@ -88,11 +93,14 @@ function resetAddFood() {
     buttonAddFood.classList.remove('button-add-food-enabled')
 }
 
-function displayActionButtons() {
-    actionButtons.style.display = 'flex';
-}
-
 async function getFood() {
+    if (foods.length === 1) {
+        clearTimeout(currentNotification);
+        notification.innerHTML = `Please, add at least one more food to use the 'GET FOOD' button.`;
+        notification.classList.add('display-notification');
+        currentNotification = setTimeout(() => notification.classList.remove('display-notification'), 4000);
+        return;
+    }
     await shuffleFoods();
     await loadFoodSelected();
     await displayFoodSelected();
@@ -133,7 +141,7 @@ async function displayFoodSelected() {
 }
 
 
-const wrapperEditFoods = document.querySelector('.wrapper-edit-foods');
+const containerEditFoods = document.querySelector('.container-edit-foods');
 const contentEditFoods = document.querySelector('.content-edit-foods');
 const editableFoods = document.querySelector('.editable-foods');
 const buttonCloseEditFoods = document.querySelector('.button-close-edit-foods');
@@ -142,12 +150,12 @@ editableFoods.addEventListener('click', editFoods);
 buttonCloseEditFoods.addEventListener('click', closeEditFoods);
 
 function openEditFoods() {
-    wrapperEditFoods.classList.add('display-edit-foods');
+    containerEditFoods.classList.add('display-edit-foods');
     displayEditableFoods();
 }
 
 function closeEditFoods() {
-    wrapperEditFoods.classList.remove('display-edit-foods');
+    containerEditFoods.classList.remove('display-edit-foods');
     updateAmountOfFoods();
     updateListOfFoods();
 }
@@ -191,9 +199,37 @@ function editFoods(event) {
     }
 }
 
+
+const containerAbout = document.querySelector('.container-about');
+const buttonCloseAbout = document.querySelector('.button-close-about');
+
+buttonCloseAbout.addEventListener('click', closeAbout);
+
+function openAbout() {
+    buttonOpenAbout.style.display = 'none';
+    containerAbout.style.display = 'flex';
+}
+
+function closeAbout() {
+    containerAbout.style.display = 'none';
+    buttonOpenAbout.style.display = 'block';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 window.addEventListener('click', event => {
     const element = event.target;
-    if (element === wrapperEditFoods) closeEditFoods();
+    if (element === containerEditFoods) closeEditFoods();
 })
 
 window.addEventListener('click', event => {

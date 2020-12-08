@@ -41,24 +41,49 @@ button {
 header {
     /* background-color: #f38181; */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    position: relative;
     background-color: #9f5f80;
     height: 150px;
 }
 
-header h1 {
-    color: #fffafa;
+header p {
+    /* color: #fffafa; */
+    color: #9f5f80;
     font-size: 2.3em;
     font-family: 'Dancing Script', cursive;
+    background-color: #fff;
+    padding: 0 5px;
+    border-radius: 3px;
+}
+
+header p:last-of-type {
+    margin-top: 7px;
+}
+
+header img {
+    position: absolute;
+    width: 32px;
+}
+
+header img:nth-of-type(1) {
+    bottom: 15px;
+    left: 15px;
+}
+
+header img:nth-of-type(2) {
+    bottom: 15px;
+    right: 15px;
 }
 
 main {
     position: relative;
     top: -40px;
     height: calc((var(--vh, 1vh) * 100) - 110px);
-    border-bottom: 1px solid red;
+    /* border-bottom: 1px solid red; */
     padding: 0 20px;
     display: flex;
     flex-direction: column;
@@ -75,7 +100,7 @@ main {
 
 .main-container {
     display: none;
-    /* border: 1px solid; */
+    width: 100%;
 }
 
 
@@ -101,7 +126,6 @@ main {
     z-index: -1;
     top: 15px;
     left: -15px;
-    /* background-color: rgba(173, 165, 165, 0.7); */
     background-color: rgba(159, 95, 128, 0.8);
 }
 
@@ -195,7 +219,7 @@ main {
 .action-buttons {
     margin-top: 25px;
     display: none;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     /* border: 1px solid; */
@@ -208,20 +232,16 @@ main {
     border-radius: 5px;
     font-weight: 0.9em;
     font-weight: 700;
-    background-color: #008CBA;
+    background-color: rgba(0, 140, 186, 1);
     color: #fffafa;
-    margin-bottom: 10px;
+    margin-right: 10px;
     transition: background-color 0.3s linear;
-}
-
-.button-get-food:hover {
-    background-color: rgba(0, 140, 186, 0.8);
 }
 
 .button-open-edit-foods {
     background-color: transparent;
     border: none;
-    padding: 10px;
+    padding: 10px 25px;
     color: #616161;
 }
 
@@ -263,8 +283,63 @@ main {
 }
 
 @keyframes loading-spinner {
-0% { transform: rotate(0deg); }
-100% { transform: rotate(360deg); }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+.button-open-about {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 0px 1px 1.5px rgba(0, 0, 0, 0.2);
+    font-size: 1.4em;
+    color: #fff;
+    background-color: #9f5f80;
+    padding-left: 2px;
+    padding-top: 1px;
+}
+
+.container-about {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 0 20px;
+}
+
+.container-about p {
+    color: #fffafa;
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+.container-about p:first-of-type {
+    text-align: center;
+}
+
+.button-close-about {
+    position: absolute;
+    bottom: 50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.8em;
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border: 2px solid #fff;
 }
 
 
@@ -274,7 +349,47 @@ main {
 
 
 
-.wrapper-edit-foods {
+
+.notification {
+    display: none;
+    width: 80%;
+    border: 1px solid rgba(159, 95, 128, 0.5);
+    border-radius: 2px;
+    position: absolute;
+    top: 30px;
+    opacity: 0;
+    font-size: 0.9em;
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.display-notification {
+    display: block;
+    animation: animation-notification 0.2s linear forwards;
+}
+
+@keyframes animation-notification {
+    from { 
+        top: 30px;
+        opacity: 0;
+    } to {
+        top: 50px;
+        opacity: 1;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.container-edit-foods {
     display: none;
     position: absolute;
     z-index: 2;
