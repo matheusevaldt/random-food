@@ -1,5 +1,6 @@
+// Global variables.
 const initialContainer = document.querySelector('.initial-container');
-const buttonOpenMainContainer = document.querySelector('.button-open-main-container');
+const buttonDisplayMainContainer = document.querySelectorAll('.button-display-main-container');
 const mainContainer = document.querySelector('.main-container');
 const formAddFood = document.querySelector('.form-add-food');
 const inputAddFood = document.querySelector('.input-add-food');
@@ -11,7 +12,7 @@ const buttonGetFood = document.querySelector('.button-get-food');
 const buttonOpenEditFoods = document.querySelector('.button-open-edit-foods');
 const foodSelected = document.querySelector('.food-selected');
 const loadingSpinner = document.querySelector('.loading-spinner');
-const buttonOpenAbout = document.querySelector('.button-open-about');
+
 const notification = document.querySelector('.notification');
 
 let currentNotification;
@@ -20,49 +21,50 @@ let idFood = 0;
 
 buttonAddFood.disabled = true;
 
-buttonOpenMainContainer.addEventListener('click', openMainContainer);
+// Event listeners.
+buttonDisplayMainContainer.forEach(button => button.addEventListener('click', displayMainContainer));
 inputAddFood.addEventListener('input', statusButtonAddFood);
 buttonAddFood.addEventListener('click', event => event.preventDefault());
 buttonAddFood.addEventListener('click', addFood);
 buttonGetFood.addEventListener('click', getFood);
 buttonOpenEditFoods.addEventListener('click', openEditFoods);
-buttonOpenAbout.addEventListener('click', openAbout);
 
-function openMainContainer() {
+function displayMainContainer() {
     initialContainer.style.display = 'none';
     mainContainer.style.display = 'block';
-    if (screen.width > 1300) inputAddFood.focus();
 }
 
 function statusButtonAddFood() {
     if (inputAddFood.value.length !== 0) {
         buttonAddFood.disabled = false;
-        // buttonAddFood.classList.add('button-add-food-enabled');
     } else {
         buttonAddFood.disabled = true;
-        // buttonAddFood.classList.remove('button-add-food-enabled');
     }
 }
 
 function addFood() {
+    appendFood();
+    updateAmountOfFoods();
+    updateListOfFoods();
+    resetFormAddFood();
+    adjustButtonGetFood();
+}
+
+function appendFood() {
     const food = inputAddFood.value;
     foods.push({id: idFood, food: food});
     idFood++;
     inputAddFood.focus();
-    updateAmountOfFoods();
-    updateListOfFoods();
-    resetAddFood();
-    if (foods.length === 1) {
-        actionButtons.style.display = 'flex';
-        amountOfFoods.style.color = '#0E101A';
-        buttonGetFood.style.backgroundColor = 'rgba(0, 140, 186, 0.6)';
-    } 
-    if (foods.length === 2) buttonGetFood.style.backgroundColor = 'rgba(0, 140, 186, 1)';
 }
 
 function updateAmountOfFoods() {
-    const amount = foods.length === 1 ? 'food has' : 'foods have';
-    amountOfFoods.innerHTML = `${foods.length} ${amount} been added.`;
+    if (foods.length === 0) {
+        amountOfFoods.innerHTML = `You haven't added any foods.`;
+    } else if (foods.length === 1) {
+        amountOfFoods.innerHTML = `1 food has been added.`;
+    } else {
+        amountOfFoods.innerHTML = `${foods.length} foods have been added.`;
+    }
 }
 
 function updateListOfFoods() {
@@ -87,10 +89,18 @@ function resetListOfFoods() {
     }
 }
 
-function resetAddFood() {
+function resetFormAddFood() {
     inputAddFood.value = '';
     buttonAddFood.disabled = true;
-    buttonAddFood.classList.remove('button-add-food-enabled')
+}
+
+function adjustButtonGetFood() {
+    if (foods.length === 1) {
+        actionButtons.style.display = 'flex';
+        amountOfFoods.style.color = '#0E101A';
+        buttonGetFood.style.backgroundColor = 'rgba(0, 140, 186, 0.6)';
+    } 
+    if (foods.length === 2) buttonGetFood.style.backgroundColor = 'rgba(0, 140, 186, 1)';
 }
 
 async function getFood() {
@@ -161,18 +171,20 @@ function closeEditFoods() {
 }
 
 function displayEditableFoods() {
-    while (editableFoods.firstChild) editableFoods.removeChild(editableFoods.firstChild);
+    while (editableFoods.firstChild) {
+        editableFoods.removeChild(editableFoods.firstChild);
+    }
     foods.forEach(food => createEditableFoods(food.id, food.food));
+    console.log('List of foods:');
     console.log(foods);
 }
 
 function createEditableFoods(id, food) {
-    console.log(food);
     const content = `
-    <li id="${id}">
-        <input type="text" class="input-rename-food" value="${food}" >
-        <button class="button-delete-food">&times;</button>
-    </li>
+        <li id="${id}">
+            <input type="text" class="input-rename-food" value="${food}">
+            <button class="button-delete-food">&times;</button>
+        </li>
     `;
     editableFoods.insertAdjacentHTML('beforeend', content);
 }
@@ -182,73 +194,25 @@ function editFoods(event) {
     const elementId = element.parentElement.id;
     const interaction = JSON.stringify(element.classList);
     if (interaction.includes('button-delete-food')) {
-        foods.splice(elementId, 1);
+        const foodsUpdated = foods.filter(food => food.id != elementId);
+        foods = foodsUpdated;
         displayEditableFoods();
     }
     if (interaction.includes('input-rename-food')) {
         const inputRenameFood = document.querySelectorAll('.input-rename-food');
         for (let i = 0; i < inputRenameFood.length; i++) {
             inputRenameFood[i].addEventListener('input', () => {
-                const newValue = event.target.value;
-                console.log(newValue);
+                const foodUpdated = event.target.value;
+                console.log(foodUpdated);
                 foods.find(food => {
-                    if (food.id == elementId) food.food = newValue;
+                    if (food.id == elementId) food.food = foodUpdated;
                 });
             });
         }
     }
 }
 
-
-const containerAbout = document.querySelector('.container-about');
-const buttonCloseAbout = document.querySelector('.button-close-about');
-
-buttonCloseAbout.addEventListener('click', closeAbout);
-
-function openAbout() {
-    buttonOpenAbout.style.display = 'none';
-    containerAbout.style.display = 'flex';
-}
-
-function closeAbout() {
-    containerAbout.style.display = 'none';
-    buttonOpenAbout.style.display = 'block';
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 window.addEventListener('click', event => {
     const element = event.target;
     if (element === containerEditFoods) closeEditFoods();
-})
-
-window.addEventListener('click', event => {
-    const element = event.target;
-    const interaction = JSON.stringify(element.classList);
-    const isMobileDevice = window.navigator.userAgent.toLowerCase().includes('mobi');
-    if (isMobileDevice) {
-        if (interaction.includes('input-rename-food')) {
-            buttonCloseEditFoods.style.display = 'none';
-            contentEditFoods.style.height = '100vh';
-        } else {
-            buttonCloseEditFoods.style.display = 'block';
-            contentEditFoods.style.height = '80vh';
-        }
-    }
 });
-
-function fixViewHeightOnMobile() {
-    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-}
-
-fixViewHeightOnMobile();

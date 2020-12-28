@@ -21,12 +21,11 @@
 
 :root {
     --black-color-text: #0E101A;
+    --grey-color-text: #616161;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
 }
 
 input,
@@ -39,51 +38,31 @@ button {
 }
 
 header {
-    /* background-color: #f38181; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    position: relative;
+    padding: 20px 0;
     background-color: #9f5f80;
-    height: 150px;
 }
 
 header p {
-    /* color: #fffafa; */
+    font-family: 'Dancing Script', cursive;
     color: #9f5f80;
     font-size: 2.3em;
-    font-family: 'Dancing Script', cursive;
     background-color: #fff;
-    padding: 0 5px;
-    border-radius: 3px;
+    padding: 2px 6px;
+    border-radius: 4px;
 }
 
 header p:last-of-type {
     margin-top: 7px;
 }
 
-header img {
-    position: absolute;
-    width: 32px;
-}
-
-header img:nth-of-type(1) {
-    bottom: 15px;
-    left: 15px;
-}
-
-header img:nth-of-type(2) {
-    bottom: 15px;
-    right: 15px;
-}
-
 main {
-    position: relative;
-    top: -40px;
-    height: calc((var(--vh, 1vh) * 100) - 110px);
-    /* border-bottom: 1px solid red; */
+    margin: 50px 0 20px 0;
+    /* border: 1px solid red; */
     padding: 0 20px;
     display: flex;
     flex-direction: column;
@@ -93,31 +72,26 @@ main {
 }
 
 .initial-container p {
-    margin-top: 20px;
-    font-size: 0.9em;
-    color: #616161;
-}
-
-.main-container {
-    display: none;
-    width: 100%;
+    margin: 20px 0 35px 0;
+    font-size: 0.85em;
+    color: var(--grey-color-text);
 }
 
 
 
 
-.button-open-main-container {
+.start-button-image {
     position: relative;
     z-index: 1;
     border: none;
     background-color: transparent;
 }
 
-.button-open-main-container img {
+.start-button-image img {
     width: 100px;
 }
 
-.button-open-main-container::before {
+.start-button-image:before {
     content: '';
     width: 100px;
     height: 100px;
@@ -126,43 +100,51 @@ main {
     z-index: -1;
     top: 15px;
     left: -15px;
-    background-color: rgba(159, 95, 128, 0.8);
+    background-color: rgba(159, 95, 128, 0.9);
+}
+
+.start-button-text {
+    border: none;
+    background-color: transparent;
+    font-size: 1.05em;
+    font-weight: 700;
+    /* padding: 5px 10px; */
+    color: var(--grey-color-text);
+}
+
+
+
+
+
+
+
+
+.main-container {
+    display: none;
+    width: 100%;
 }
 
 .form-add-food {
     display: grid;
     grid-template-columns: 85% 15%;
     width: 100%;
-    margin-bottom: 20px;
-    /* border: 1px solid; */
+    /* margin-bottom: 20px; */
 }
 
-.form-add-food:hover .input-add-food,
-.input-add-food:focus {
-    border: 2px solid rgba(159, 95, 128, 0.8);
-    background-color: transparent;
-    border-right: none;
-}
-
-.form-add-food:hover .button-add-food,
-.form-add-food:focus .button-add-food,
-.input-add-food:focus + .button-add-food {
-    border: 2px solid rgba(159, 95, 128, 0.8);
-    background-color: transparent;
-    border-left: none;
+.input-add-food,
+.button-add-food {
+    padding: 12px 10px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.15);
+    transition: all 0.3s linear;
 }
 
 .input-add-food {
-    padding: 12px 10px;
     font-size: 0.9em;
-    background-color: rgba(0, 0, 0, 0.15);
-    border: 2px solid transparent;
     border-right: none;
-    border-radius: 5px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    transition: all 0.3s linear;
-    position: relative;
 }
 
 .input-add-food::placeholder {
@@ -171,16 +153,10 @@ main {
 
 .button-add-food {
     position: relative;
-    padding: 12px 10px;
     font-size: 1.8em;
-    background-color: rgba(0, 0, 0, 0.15);
-    color: #fffafa;
-    border: 2px solid transparent;
     border-left: none;
-    border-radius: 5px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    transition: all 0.3s linear;
 }
 
 .button-add-food::before {
@@ -193,16 +169,31 @@ main {
     transform: translate(-50%, -50%);
 }
 
-.button-add-food-enabled {
-    background-color: #9f5f80;
+.input-add-food:hover,
+.input-add-food:focus {
+    border: 2px solid rgba(159, 95, 128, 0.8);
+    border-right: none;
+    background-color: transparent;
 }
+
+.input-add-food:hover + .button-add-food,
+.input-add-food:focus + .button-add-food {
+    border: 2px solid rgba(159, 95, 128, 0.8);
+    border-left: none;
+    background-color: transparent;
+}
+
+
+
 
 .amount-of-foods {
     color: #616161;
     font-size: 0.9em;
+    margin-top: 30px;
 }
 
 .list-of-foods {
+    margin-bottom: 30px;
     list-style: none;
     color: var(--black-color-text);
 }
@@ -288,61 +279,6 @@ main {
 }
 
 
-.button-open-about {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    box-shadow: 0 0px 1px 1.5px rgba(0, 0, 0, 0.2);
-    font-size: 1.4em;
-    color: #fff;
-    background-color: #9f5f80;
-    padding-left: 2px;
-    padding-top: 1px;
-}
-
-.container-about {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    padding: 0 20px;
-}
-
-.container-about p {
-    color: #fffafa;
-    font-size: 1em;
-    margin-bottom: 20px;
-}
-
-.container-about p:first-of-type {
-    text-align: center;
-}
-
-.button-close-about {
-    position: absolute;
-    bottom: 50px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 1.8em;
-    font-weight: 700;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    border: 2px solid #fff;
-}
-
-
 
 
 
@@ -387,7 +323,7 @@ main {
 
 
 
-
+/* Adjust scroll when user is using desktop version (add media query) */
 
 .container-edit-foods {
     display: none;
@@ -397,7 +333,7 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .display-edit-foods {
@@ -405,11 +341,9 @@ main {
 }
 
 .content-edit-foods {
-    position: relative;
     background-color: #9f5f80;
     color: #fffafa;
-    height: 80vh;
-    padding: 30px 20px 0 20px;
+    padding: 30px 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
@@ -445,7 +379,6 @@ main {
 
 .editable-foods li {
     margin-bottom: 12px;
-    position: relative;
     display: grid;
     grid-template-columns: 85% 15%;
 }
@@ -471,10 +404,8 @@ main {
 }
 
 .button-close-edit-foods {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 20px;
+    display: block;
+    margin: 30px auto 0 auto;
     padding: 10px 25px;
     border-radius: 10px;
     font-size: 0.9em;

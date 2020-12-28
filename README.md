@@ -1,5 +1,9 @@
 # Random food
 
-You are approaching dinner but you still don't know what you would like to eat.
+It's time to eat.
 
-In this application you can inform your favorite foods and it will randomly pick one for you.
+You have to cook something or order some food. However, you are unsure about what you are going to eat.
+
+This application randomly chooses one of the foods that you have added to your list.
+
+You can also edit, rename and delete foods that you have added.

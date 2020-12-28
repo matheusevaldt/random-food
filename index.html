@@ -20,26 +20,22 @@
     <header>
         <p>What would you like</p>
         <p>to eat?</p>
-        <!-- <img src="images/pizza.png"> -->
-        <img src="images/cupcake.png">
-        <img src="images/coffee.png">
     </header>
 
     <main>
 
-        <!-- 
-            - create one separate div when user clicks in GET FOOD, hide the rest (also in a separate div) -- 50% done
-            - get food button with opacity (disabled) when there's only one food added. make it normal after 2 foods added
-        -->
-
         <div class="initial-container">
-            <button class="button-open-main-container">
-                <img src="images/add.png">
+            <button class="button-display-main-container start-button-image">
+                <img src="images/start-button.png">
             </button>
-            <p>You haven't added any foods. <br> Let's begin.</p>
+            <p>You haven't added any foods.<p>
+            <button class="button-display-main-container start-button-text">Let's begin.</button>
         </div>
 
+
+
         <div class="main-container">
+
             <form class="form-add-food">
                 <input type="text" class="input-add-food" placeholder="Insert food">
                 <button class="button-add-food"></button>
@@ -57,17 +53,19 @@
             <div class="loading-spinner"></div>
         </div>
 
-        <button class="button-open-about">?</button>
+
 
         <div class="notification"></div>
+
         
     </main>
+
 
     <div class="container-edit-foods">
         <div class="content-edit-foods">
             <div class="edit-foods-info">
                 <h1>Rename & remove</h1>
-                <h2>Make the necessary modifications on the foods that have been added to your list.</h2>
+                <h2>Make the necessary modifications in the foods that have been added to your list.</h2>
             </div>
             <ul class="editable-foods">
                 <li>
@@ -79,21 +77,6 @@
         </div>
     </div>
 
-    <div class="container-about">
-        <p>
-            It's time to eat.
-        </p>
-        <p>
-            You have to cook something or order some food. However, you are unsure about what you are going to eat.
-        </p>
-        <p>
-            This application randomly chooses one of the foods that you have added to your list.
-        </p>
-        <p>
-            You can also edit, rename and delete foods that you have added.
-        </p>
-        <button class="button-close-about">&times;</button>
-    </div>
 
 </body>
 </html>
