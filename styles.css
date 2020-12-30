@@ -20,8 +20,13 @@
 }
 
 :root {
+    --main-color: #9f5f80;
     --black-color-text: #0E101A;
     --grey-color-text: #616161;
+}
+
+ul {
+    list-style: none;
 }
 
 body {
@@ -43,7 +48,7 @@ header {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px 0;
+    height: 150px;
     background-color: #9f5f80;
 }
 
@@ -61,8 +66,7 @@ header p:last-of-type {
 }
 
 main {
-    margin: 50px 0 20px 0;
-    /* border: 1px solid red; */
+    margin-top: 60px;
     padding: 0 20px;
     display: flex;
     flex-direction: column;
@@ -72,13 +76,10 @@ main {
 }
 
 .initial-container p {
-    margin: 20px 0 35px 0;
+    margin-top: 20px;
     font-size: 0.85em;
     color: var(--grey-color-text);
 }
-
-
-
 
 .start-button-image {
     position: relative;
@@ -108,18 +109,11 @@ main {
     background-color: transparent;
     font-size: 1.05em;
     font-weight: 700;
-    /* padding: 5px 10px; */
     color: var(--grey-color-text);
 }
 
-
-
-
-
-
-
-
 .main-container {
+    /* border: 1px solid; */
     display: none;
     width: 100%;
 }
@@ -128,7 +122,6 @@ main {
     display: grid;
     grid-template-columns: 85% 15%;
     width: 100%;
-    /* margin-bottom: 20px; */
 }
 
 .input-add-food,
@@ -183,9 +176,6 @@ main {
     background-color: transparent;
 }
 
-
-
-
 .amount-of-foods {
     color: #616161;
     font-size: 0.9em;
@@ -193,8 +183,8 @@ main {
 }
 
 .list-of-foods {
+    display: none;
     margin-bottom: 30px;
-    list-style: none;
     color: var(--black-color-text);
 }
 
@@ -203,7 +193,6 @@ main {
 }
 
 .food-highlight {
-    color: #3b3b3b;
     font-weight: 700;
 }
 
@@ -219,11 +208,10 @@ main {
 .button-get-food {
     padding: 10px 25px;
     border: none;
-    border-bottom: 4px solid #00465e;
+    border-bottom: 4px solid rgb(95, 40, 69);
     border-radius: 5px;
     font-weight: 0.9em;
     font-weight: 700;
-    background-color: rgba(0, 140, 186, 1);
     color: #fffafa;
     margin-right: 10px;
     transition: background-color 0.3s linear;
@@ -240,11 +228,21 @@ main {
     text-decoration: underline;
 }
 
-.food-selected {
-    /* border: 1px solid blue; */
+
+
+
+
+.result-container {
+    display: none;
+    border: 1px solid;
 }
 
-.a {
+.selectable-foods {
+    margin: 20px 0;
+    border: 1px solid red;
+}
+
+.display-selectable-food {
     animation: a 1s ease;
 }
 
@@ -261,6 +259,11 @@ main {
         transform: translateX(0px);
         color: red;
     }
+}
+
+.selected-food {
+    border: 1px solid blue;
+    margin: 20px 0;
 }
 
 .loading-spinner {
@@ -413,4 +416,24 @@ main {
     border: 2px solid #fffafa;
     background-color: #5f2d47;
     color: #fffafa;
+}
+
+
+
+
+
+
+/* Hide when input add food is being focused */
+
+.background-images {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    padding: 10px 0;
+}
+
+.background-images img {
+    width: 48px;
 }

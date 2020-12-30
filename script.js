@@ -1,6 +1,7 @@
 // Global variables.
 const initialContainer = document.querySelector('.initial-container');
 const buttonDisplayMainContainer = document.querySelectorAll('.button-display-main-container');
+
 const mainContainer = document.querySelector('.main-container');
 const formAddFood = document.querySelector('.form-add-food');
 const inputAddFood = document.querySelector('.input-add-food');
@@ -10,7 +11,10 @@ const listOfFoods = document.querySelector('.list-of-foods');
 const actionButtons = document.querySelector('.action-buttons');
 const buttonGetFood = document.querySelector('.button-get-food');
 const buttonOpenEditFoods = document.querySelector('.button-open-edit-foods');
-const foodSelected = document.querySelector('.food-selected');
+
+const resultContainer = document.querySelector('.result-container');
+const selectableFoods = document.querySelector('.selectable-foods');
+const selectedFood = document.querySelector('.selected-food');
 const loadingSpinner = document.querySelector('.loading-spinner');
 
 const notification = document.querySelector('.notification');
@@ -45,9 +49,10 @@ function statusButtonAddFood() {
 function addFood() {
     appendFood();
     updateAmountOfFoods();
+    displayListOfFoods();
     updateListOfFoods();
     resetFormAddFood();
-    adjustButtonGetFood();
+    statusButtonGetFood();
 }
 
 function appendFood() {
@@ -65,6 +70,10 @@ function updateAmountOfFoods() {
     } else {
         amountOfFoods.innerHTML = `${foods.length} foods have been added.`;
     }
+}
+
+function displayListOfFoods() {
+    if (foods.length === 1) listOfFoods.style.display = 'block';
 }
 
 function updateListOfFoods() {
@@ -94,13 +103,13 @@ function resetFormAddFood() {
     buttonAddFood.disabled = true;
 }
 
-function adjustButtonGetFood() {
+function statusButtonGetFood() {
     if (foods.length === 1) {
         actionButtons.style.display = 'flex';
         amountOfFoods.style.color = '#0E101A';
-        buttonGetFood.style.backgroundColor = 'rgba(0, 140, 186, 0.6)';
+        buttonGetFood.style.backgroundColor = 'rgba(159, 95, 128, 0.6)';
     } 
-    if (foods.length === 2) buttonGetFood.style.backgroundColor = 'rgba(0, 140, 186, 1)';
+    if (foods.length === 2) buttonGetFood.style.backgroundColor = 'rgba(159, 95, 128, 1)';
 }
 
 async function getFood() {
@@ -111,26 +120,35 @@ async function getFood() {
         currentNotification = setTimeout(() => notification.classList.remove('display-notification'), 4000);
         return;
     }
+    hideMainContainer();
+    displayResultContainer();
     await shuffleFoods();
-    await loadFoodSelected();
-    await displayFoodSelected();
+    await loadSelectedFood();
+    await displaySelectedFood();
+}
+
+function hideMainContainer() {
+    mainContainer.style.display = 'none';
+}
+
+function displayResultContainer() {
+    resultContainer.style.display = 'block';
 }
 
 async function shuffleFoods() {
     await new Promise(resolve => {
         for (let i = 0; i < foods.length; i++) {
             setTimeout(() => {
-                foodSelected.innerHTML = foods[i].food;
-                console.log(foods[i].food);
-                foodSelected.classList.add('a');
-                setTimeout(() => foodSelected.classList.remove('a'), 900)
+                selectableFoods.innerHTML = foods[i].food;
+                selectableFoods.classList.add('display-selectable-food');
+                setTimeout(() => selectableFoods.classList.remove('display-selectable-food'), 900)
                 if (i === foods.length - 1) resolve();
             }, i * 1000);
         }
     });
 }
 
-async function loadFoodSelected() {
+async function loadSelectedFood() {
     await new Promise(resolve => {
         setTimeout(() => {
             loadingSpinner.style.display = 'block';
@@ -139,16 +157,22 @@ async function loadFoodSelected() {
     });
 }
 
-async function displayFoodSelected() {
+async function displaySelectedFood() {
     await new Promise(resolve => {
         setTimeout(() => {
             loadingSpinner.style.display = 'none';
             const food = foods[Math.floor(Math.random() * foods.length)];
-            foodSelected.innerHTML = `The food that has been selected is: ${food.food}`;
+            selectedFood.innerHTML = `The food that has been selected is: ${food.food}`;
             resolve();
         }, 2000);
     });
 }
+
+
+
+
+
+
 
 
 const containerEditFoods = document.querySelector('.container-edit-foods');
@@ -168,6 +192,7 @@ function closeEditFoods() {
     containerEditFoods.classList.remove('display-edit-foods');
     updateAmountOfFoods();
     updateListOfFoods();
+    statusButtonGetFood();
 }
 
 function displayEditableFoods() {
