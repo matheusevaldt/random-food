@@ -234,52 +234,111 @@ main {
 
 .result-container {
     display: none;
-    border: 1px solid;
+    width: 100%;
+}
+
+.shuffling-foods p:first-of-type {
+    font-size: 0.85em;
+    color: var(--grey-color-text);
+    margin-bottom: 15px;
+}
+
+.shuffling-foods p:last-of-type {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--black-color-text);
 }
 
 .selectable-foods {
-    margin: 20px 0;
-    border: 1px solid red;
+    opacity: 0;
 }
 
 .display-selectable-food {
-    animation: a 1s ease;
+    animation: display-selectable-food 1s ease-in-out;
 }
 
-@keyframes a {
-    0% {
-        transform: translateX(0px);
-        color: green;
-    }
-    50% {
-        transform: translateX(50px);
-        color: blue;
-    }
-    100% {
-        transform: translateX(0px);
-        color: red;
-    }
+@keyframes display-selectable-food {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.loading-food {
+    display: none;
+    margin: 0 auto;
+    border: 6px solid #f0f0f0;
+    border-top: 6px solid var(--main-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: loading-food 1.2s linear infinite;
+}
+
+@keyframes loading-food {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .selected-food {
-    border: 1px solid blue;
-    margin: 20px 0;
-}
-
-.loading-spinner {
     display: none;
-    border: 4px solid red;
-    border-top: 4px solid blue;
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    animation: loading-spinner 1.2s linear infinite;
 }
 
-@keyframes loading-spinner {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+.selected-food p:nth-of-type(1) {
+    font-size: 0.85em;
+    color: var(--grey-color-text);
 }
+
+.outcome {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--main-color);
+    margin: 15px 0 70px 0;
+    opacity: 0;
+}
+
+.display-outcome {
+    animation: display-outcome 0.5s linear forwards;
+}
+
+@keyframes display-outcome {
+    from { 
+        opacity: 0;
+        transform: scale(0);
+    }
+    to { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.outcome-buttons {
+    display: none;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    opacity: 0;
+}
+
+.display-outcome-buttons {
+    display: flex;
+    animation: display-outcome-buttons 1s linear forwards;
+}
+
+@keyframes display-outcome-buttons {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.outcome-buttons button {
+    border: none;
+    background-color: transparent;
+    font-size: 0.85em;
+    font-weight: 700;
+    color: var(--grey-color-text);
+}
+
+
+
 
 
 
@@ -425,15 +484,19 @@ main {
 
 /* Hide when input add food is being focused */
 
-.background-images {
+.footer-images {
     text-align: center;
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: red;
     padding: 10px 0;
+    z-index: -1;
 }
 
-.background-images img {
-    width: 48px;
+.footer-images img {
+    width: 38px;
+}
+
+.footer-images img:first-of-type {
+    margin-right: 12px;
 }
