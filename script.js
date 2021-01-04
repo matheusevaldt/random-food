@@ -13,9 +13,13 @@ const buttonGetFood = document.querySelector('.button-get-food');
 const buttonOpenEditFoods = document.querySelector('.button-open-edit-foods');
 
 const resultContainer = document.querySelector('.result-container');
-const shufflingFoods = document.querySelector('.shuffling-foods');
-const selectedFood = document.querySelector('.selected-food');
+const resultNumberStep = document.querySelector('.result-number-step');
+const resultCurrentStep = document.querySelector('.result-current-step');
+const selectableFoods = document.querySelector('.selectable-foods');
 const loadingFood = document.querySelector('.loading-food');
+const selectedFood = document.querySelector('.selected-food');
+const buttonRetry = document.querySelector('.button-retry');
+
 
 const notification = document.querySelector('.notification');
 
@@ -34,6 +38,7 @@ buttonAddFood.addEventListener('click', event => event.preventDefault());
 buttonAddFood.addEventListener('click', addFood);
 buttonGetFood.addEventListener('click', getFood);
 buttonOpenEditFoods.addEventListener('click', openEditFoods);
+buttonRetry.addEventListener('click', retry);
 
 function displayMainContainer() {
     initialContainer.style.display = 'none';
@@ -125,8 +130,8 @@ async function getFood() {
     hideMainContainer();
     displayResultContainer();
     await shuffleFoods();
-    await loadSelectedFood();
-    await displaySelectedFood();
+    await loadSelectedFood(1000);
+    await displaySelectedFood(2000);
 }
 
 function hideMainContainer() {
@@ -137,11 +142,17 @@ function displayResultContainer() {
     resultContainer.style.display = 'block';
 }
 
+const outcome = document.querySelector('.outcome');
+const outcomeButtons = document.querySelector('.outcome-buttons');
+
 async function shuffleFoods() {
     await new Promise(resolve => {
         for (let i = 0; i < foods.length; i++) {
             setTimeout(() => {
-                const selectableFoods = document.querySelector('.selectable-foods');
+                console.log(foods[i].food);
+                resultNumberStep.innerHTML = '[1/3]'
+                resultCurrentStep.innerHTML = 'Shuffling your foods...';
+                selectableFoods.style.display = 'block';
                 selectableFoods.innerHTML = foods[i].food;
                 selectableFoods.classList.add('display-selectable-food');
                 setTimeout(() => selectableFoods.classList.remove('display-selectable-food'), 950);
@@ -151,36 +162,48 @@ async function shuffleFoods() {
     });
 }
 
-async function loadSelectedFood() {
+async function loadSelectedFood(delay) {
     await new Promise(resolve => {
         setTimeout(() => {
-            shufflingFoods.style.display = 'none';
+            resultNumberStep.innerHTML = '[2/3]';
+            resultCurrentStep.innerHTML = 'Getting your food...';
+            selectableFoods.style.display = 'none';
             loadingFood.style.display = 'block';
             resolve();
-        }, 1000); // Execute this function 1500ms after the previous function has ended.
+        }, delay); // Execute this function 1500ms after the previous function has ended.
     });
 }
 
-async function displaySelectedFood() {
+async function displaySelectedFood(delay) {
     await new Promise(resolve => {
         setTimeout(() => {
+            resultNumberStep.innerHTML = '[3/3]';
+            resultCurrentStep.innerHTML = `Here's your food. <span>&#9996;</span>`;
             loadingFood.style.display = 'none';
             selectedFood.style.display = 'block';
             const food = foods[Math.floor(Math.random() * foods.length)];
             setTimeout(() => {
-                const outcome = document.querySelector('.outcome');
                 outcome.classList.add('display-outcome');
                 outcome.innerHTML = `${food.food}`;
             }, 1000);
             setTimeout(() => {
-                const outcomeButtons = document.querySelector('.outcome-buttons');
                 outcomeButtons.classList.add('display-outcome-buttons');
             }, 3000);
             resolve();
-        }, 2000);
+        }, delay);
     });
 }
 
+
+async function retry() {
+    selectedFood.style.display = 'none';
+    outcome.classList.remove('display-outcome');
+    outcomeButtons.classList.remove('display-outcome-buttons');
+    selectableFoods.classList.remove('display-selectable-food');
+    await shuffleFoods();
+    await loadSelectedFood(1000);
+    await displaySelectedFood(2000);
+}
 
 
 
@@ -255,15 +278,15 @@ window.addEventListener('click', event => {
     if (element === containerEditFoods) closeEditFoods();
 });
 
-window.addEventListener('click', () => {
-    const elementOnFocus = document.activeElement;
-    const isMobileDevice = window.navigator.userAgent.toLowerCase().includes('mobi');
-    const footerImages = document.querySelector('.footer-images');
-    if (isMobileDevice) {
-        if (elementOnFocus === inputAddFood) {
-            footerImages.style.display = 'none';
-        } else {
-            setTimeout(() => footerImages.style.display = 'block', 300);
-        }
-    }
-});
+// window.addEventListener('click', () => {
+//     const elementOnFocus = document.activeElement;
+//     const isMobileDevice = window.navigator.userAgent.toLowerCase().includes('mobi');
+//     const footerImages = document.querySelector('.footer-images');
+//     if (isMobileDevice) {
+//         if (elementOnFocus === inputAddFood) {
+//             footerImages.style.display = 'none';
+//         } else {
+//             setTimeout(() => footerImages.style.display = 'block', 300);
+//         }
+//     }
+// });

@@ -32,8 +32,6 @@
             <button class="button-display-main-container start-button-text">Let's begin.</button>
         </div>
 
-
-
         <div class="main-container">
 
             <form class="form-add-food">
@@ -52,19 +50,24 @@
         </div>
 
         <div class="result-container">
-            <div class="shuffling-foods">
-                <p>Shuffling your foods.</p>
-                <p class="selectable-foods">arroz</p>
+
+            <div class="result-header">
+                <div class="result-number-step">[1/3]</div>
+                <div class="result-current-step">Shuffling your foods...</div>
             </div>
+
+            <div class="selectable-foods">Arroz</div>
+
             <div class="loading-food"></div>
+
             <div class="selected-food">
-                <p>The food that has been selected is...</p>
                 <p class="outcome"></p>
                 <div class="outcome-buttons">
-                    <button>Return to home</button>
-                    <button>Roll it again</button>
+                    <button class="button-retry">RETRY</button>
+                    <button class="button-reset">Reset foods</button>
                 </div>
             </div>
+
         </div>
         
     </main>
@@ -88,9 +91,9 @@
 
     <div class="notification"></div>
 
-    <div class="footer-images">
+    <!-- <div class="footer-images">
         <img src="images/cupcake.png">
-    </div>
+    </div> -->
 
 </body>
 </html>

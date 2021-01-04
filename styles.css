@@ -229,28 +229,36 @@ main {
 }
 
 
-
-
+/* .initial-container { display: none; } */
 
 .result-container {
     display: none;
     width: 100%;
 }
 
-.shuffling-foods p:first-of-type {
-    font-size: 0.85em;
-    color: var(--grey-color-text);
-    margin-bottom: 15px;
+.result-header {
+    margin-bottom: 25px;
 }
 
-.shuffling-foods p:last-of-type {
-    font-size: 1.8em;
-    font-weight: 700;
-    color: var(--black-color-text);
+.result-header div:nth-of-type(1) {
+    font-size: 0.75em;
+    color: var(--grey-color-text);
+    margin-bottom: 2px;
+}
+
+.result-header div:nth-of-type(2) {
+    font-size: 0.9em;
+}
+
+.result-header div:nth-of-type(2) span {
+    position: relative;
+    top: -1px;
 }
 
 .selectable-foods {
     opacity: 0;
+    font-size: 1.1em;
+    font-weight: 700;
 }
 
 .display-selectable-food {
@@ -283,29 +291,27 @@ main {
     display: none;
 }
 
-.selected-food p:nth-of-type(1) {
-    font-size: 0.85em;
-    color: var(--grey-color-text);
-}
-
 .outcome {
-    font-size: 1.8em;
+    font-size: 1.6em;
     font-weight: 700;
     color: var(--main-color);
-    margin: 15px 0 70px 0;
+    margin-bottom: 90px;
     opacity: 0;
 }
 
 .display-outcome {
-    animation: display-outcome 0.5s linear forwards;
+    animation: display-outcome 0.7s linear forwards;
 }
 
 @keyframes display-outcome {
-    from { 
+    0% { 
         opacity: 0;
         transform: scale(0);
     }
-    to { 
+    80% {
+        transform: scale(1.2);
+    }
+    100% { 
         opacity: 1;
         transform: scale(1);
     }
@@ -313,8 +319,8 @@ main {
 
 .outcome-buttons {
     display: none;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     opacity: 0;
 }
@@ -329,18 +335,33 @@ main {
     to { opacity: 1; }
 }
 
-.outcome-buttons button {
-    border: none;
-    background-color: transparent;
-    font-size: 0.85em;
+.button-retry {
+    width: 180px;
+    padding: 10px 0;
+    border: 2px solid rgba(159, 95, 128, 1);
+    border-radius: 50px;
+    background-color: rgba(159, 95, 128, 0.8);
+    color: #fffafa;
     font-weight: 700;
-    color: var(--grey-color-text);
+    font-size: 0.9em;
+    margin-bottom: 25px;
+    transition: background-color 0.3s linear;
 }
 
+.button-retry:hover,
+.button-retry:focus {
+    background-color: rgba(159, 95, 128, 0.6);
+}
 
+.button-reset {
+    border: none;
+    background-color: transparent;
+}
 
-
-
+.button-reset:hover,
+.button-reset:focus {
+    text-decoration: underline;
+}
 
 
 
