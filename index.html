@@ -12,11 +12,6 @@
 </head>
 <body>
 
-    <!-- 
-        https://css-tricks.com/making-css-animations-feel-natural/
-        https://stackoverflow.com/questions/51275801/continuous-async-await-with-settimeout
-     -->
-
     <header>
         <p>What would you like</p>
         <p>to eat?</p>
@@ -33,45 +28,35 @@
         </div>
 
         <div class="main-container">
-
             <form class="form-add-food">
                 <input type="text" class="input-add-food" placeholder="Insert food">
                 <button class="button-add-food"></button>
             </form>
-        
             <p class="amount-of-foods">You haven't added any foods.</p>
             <ul class="list-of-foods"></ul>
-        
             <div class="action-buttons">
                 <button class="button-get-food">GET FOOD</button>
                 <button class="button-open-edit-foods">EDIT FOODS</button>
             </div>
-    
         </div>
 
         <div class="result-container">
-
             <div class="result-header">
-                <div class="result-number-step">[1/3]</div>
-                <div class="result-current-step">Shuffling your foods...</div>
+                <div class="result-number-step"></div>
+                <div class="result-current-step"></div>
             </div>
-
-            <div class="selectable-foods">Arroz</div>
-
+            <div class="selectable-foods"></div>
             <div class="loading-food"></div>
-
             <div class="selected-food">
                 <p class="outcome"></p>
                 <div class="outcome-buttons">
                     <button class="button-retry">RETRY</button>
-                    <button class="button-reset">Reset foods</button>
+                    <button class="button-reset-application">Reset foods</button>
                 </div>
             </div>
-
         </div>
         
     </main>
-
 
     <div class="container-edit-foods">
         <div class="content-edit-foods">
@@ -90,10 +75,6 @@
     </div>
 
     <div class="notification"></div>
-
-    <!-- <div class="footer-images">
-        <img src="images/cupcake.png">
-    </div> -->
 
 </body>
 </html>

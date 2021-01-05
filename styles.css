@@ -113,7 +113,6 @@ main {
 }
 
 .main-container {
-    /* border: 1px solid; */
     display: none;
     width: 100%;
 }
@@ -202,7 +201,6 @@ main {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid; */
 }
 
 .button-get-food {
@@ -221,15 +219,13 @@ main {
     background-color: transparent;
     border: none;
     padding: 10px 25px;
-    color: #616161;
+    color: var(--black-color-text);
 }
 
 .button-open-edit-foods:hover {
     text-decoration: underline;
 }
 
-
-/* .initial-container { display: none; } */
 
 .result-container {
     display: none;
@@ -350,64 +346,21 @@ main {
 
 .button-retry:hover,
 .button-retry:focus {
-    background-color: rgba(159, 95, 128, 0.6);
+    background-color: rgba(159, 95, 128, 1);
 }
 
-.button-reset {
+.button-reset-application {
     border: none;
     background-color: transparent;
 }
 
-.button-reset:hover,
-.button-reset:focus {
+.button-reset-application:hover,
+.button-reset-application:focus {
     text-decoration: underline;
 }
 
 
-
-
-
-
-
-.notification {
-    display: none;
-    width: 80%;
-    border: 1px solid rgba(159, 95, 128, 0.5);
-    border-radius: 2px;
-    position: absolute;
-    top: 30px;
-    opacity: 0;
-    font-size: 0.9em;
-    padding: 5px 10px;
-    background-color: rgba(0, 0, 0, 0.05);
-}
-
-.display-notification {
-    display: block;
-    animation: animation-notification 0.2s linear forwards;
-}
-
-@keyframes animation-notification {
-    from { 
-        top: 30px;
-        opacity: 0;
-    } to {
-        top: 50px;
-        opacity: 1;
-    }
-}
-
-
-
-
-
-
-
-
-
-
 /* Adjust scroll when user is using desktop version (add media query) */
-
 .container-edit-foods {
     display: none;
     position: absolute;
@@ -500,24 +453,29 @@ main {
 
 
 
-
-
-
-/* Hide when input add food is being focused */
-
-.footer-images {
+.notification {
+    display: none;
+    width: 90%;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding: 10px 0;
-    z-index: -1;
+    font-size: 0.9em;
+    opacity: 0;
 }
 
-.footer-images img {
-    width: 38px;
+.display-notification {
+    display: block;
+    animation: animation-notification 0.2s linear forwards;
 }
 
-.footer-images img:first-of-type {
-    margin-right: 12px;
+@keyframes animation-notification {
+    from { 
+        bottom: 10px;
+        opacity: 0;
+    } to {
+        bottom: 30px;
+        opacity: 1;
+    }
 }

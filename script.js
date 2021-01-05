@@ -19,11 +19,9 @@ const selectableFoods = document.querySelector('.selectable-foods');
 const loadingFood = document.querySelector('.loading-food');
 const selectedFood = document.querySelector('.selected-food');
 const buttonRetry = document.querySelector('.button-retry');
-
+const buttonResetApplication = document.querySelector('.button-reset-application');
 
 const notification = document.querySelector('.notification');
-
-
 
 let currentNotification;
 let foods = [];
@@ -39,6 +37,7 @@ buttonAddFood.addEventListener('click', addFood);
 buttonGetFood.addEventListener('click', getFood);
 buttonOpenEditFoods.addEventListener('click', openEditFoods);
 buttonRetry.addEventListener('click', retry);
+buttonResetApplication.addEventListener('click', resetApplication);
 
 function displayMainContainer() {
     initialContainer.style.display = 'none';
@@ -120,18 +119,19 @@ function statusButtonGetFood() {
 }
 
 async function getFood() {
-    if (foods.length === 1) {
-        clearTimeout(currentNotification);
-        notification.innerHTML = `Please, add at least one more food to use the 'GET FOOD' button.`;
-        notification.classList.add('display-notification');
-        currentNotification = setTimeout(() => notification.classList.remove('display-notification'), 4000);
-        return;
-    }
+    if (foods.length === 1) return notifyUser();
     hideMainContainer();
     displayResultContainer();
     await shuffleFoods();
     await loadSelectedFood(1000);
     await displaySelectedFood(2000);
+}
+
+function notifyUser() {
+    clearTimeout(currentNotification);
+    notification.innerHTML = 'You must add at least two foods to use the <strong>GET FOOD</strong> functionality.';
+    notification.classList.add('display-notification');
+    currentNotification = setTimeout(() => notification.classList.remove('display-notification'), 4000);
 }
 
 function hideMainContainer() {
@@ -194,17 +194,32 @@ async function displaySelectedFood(delay) {
     });
 }
 
-
 async function retry() {
-    selectedFood.style.display = 'none';
-    outcome.classList.remove('display-outcome');
-    outcomeButtons.classList.remove('display-outcome-buttons');
-    selectableFoods.classList.remove('display-selectable-food');
+    resetResultContainer();
     await shuffleFoods();
     await loadSelectedFood(1000);
     await displaySelectedFood(2000);
 }
 
+function resetResultContainer() {
+    selectedFood.style.display = 'none';
+    outcome.classList.remove('display-outcome');
+    outcomeButtons.classList.remove('display-outcome-buttons');
+    selectableFoods.classList.remove('display-selectable-food');
+}
+
+function resetApplication() {
+    resetResultContainer();
+    resultContainer.style.display = 'none';
+    mainContainer.style.display = 'none';
+    initialContainer.style.display = 'block';
+    foods = [];
+    idFood = 0;
+    updateAmountOfFoods();
+    updateListOfFoods();
+    actionButtons.style.display = 'none';
+    statusButtonGetFood();
+}
 
 
 
@@ -277,16 +292,3 @@ window.addEventListener('click', event => {
     const element = event.target;
     if (element === containerEditFoods) closeEditFoods();
 });
-
-// window.addEventListener('click', () => {
-//     const elementOnFocus = document.activeElement;
-//     const isMobileDevice = window.navigator.userAgent.toLowerCase().includes('mobi');
-//     const footerImages = document.querySelector('.footer-images');
-//     if (isMobileDevice) {
-//         if (elementOnFocus === inputAddFood) {
-//             footerImages.style.display = 'none';
-//         } else {
-//             setTimeout(() => footerImages.style.display = 'block', 300);
-//         }
-//     }
-// });
