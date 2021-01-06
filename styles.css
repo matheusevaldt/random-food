@@ -23,6 +23,7 @@
     --main-color: #9f5f80;
     --black-color-text: #0E101A;
     --grey-color-text: #616161;
+    --white-color-text: #fffafa;
 }
 
 ul {
@@ -49,13 +50,13 @@ header {
     align-items: center;
     text-align: center;
     height: 150px;
-    background-color: #9f5f80;
+    background-color: var(--main-color);
 }
 
 header p {
     font-family: 'Dancing Script', cursive;
-    color: #9f5f80;
     font-size: 2.3em;
+    color: var(--main-color);
     background-color: #fff;
     padding: 2px 6px;
     border-radius: 4px;
@@ -75,17 +76,27 @@ main {
     text-align: center;
 }
 
+.initial-container,
+.main-container,
+.result-container {
+    width: 100%;
+}
+
 .initial-container p {
     margin-top: 20px;
     font-size: 0.85em;
     color: var(--grey-color-text);
 }
 
+.start-button-image,
+.start-button-text {
+    border: none;
+    background-color: transparent;
+}
+
 .start-button-image {
     position: relative;
     z-index: 1;
-    border: none;
-    background-color: transparent;
 }
 
 .start-button-image img {
@@ -98,15 +109,13 @@ main {
     height: 100px;
     border-radius: 100%;
     position: absolute;
-    z-index: -1;
     top: 15px;
     left: -15px;
     background-color: rgba(159, 95, 128, 0.9);
+    z-index: -1;
 }
 
 .start-button-text {
-    border: none;
-    background-color: transparent;
     font-size: 1.05em;
     font-weight: 700;
     color: var(--grey-color-text);
@@ -114,7 +123,6 @@ main {
 
 .main-container {
     display: none;
-    width: 100%;
 }
 
 .form-add-food {
@@ -146,6 +154,8 @@ main {
 .button-add-food {
     position: relative;
     font-size: 1.8em;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.7);
     border-left: none;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -156,8 +166,6 @@ main {
     position: absolute;
     top: 50%;
     left: 50%;
-    color: rgba(0, 0, 0, 0.7);
-    font-weight: 700;
     transform: translate(-50%, -50%);
 }
 
@@ -176,7 +184,7 @@ main {
 }
 
 .amount-of-foods {
-    color: #616161;
+    color: var(--grey-color-text);
     font-size: 0.9em;
     margin-top: 30px;
 }
@@ -191,34 +199,32 @@ main {
     display: inline;
 }
 
-.food-highlight {
-    font-weight: 700;
-}
-
-.action-buttons {
-    margin-top: 25px;
+.main-buttons {
     display: none;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.button-get-food {
+.button-get-food,
+.button-open-edit-foods {
     padding: 10px 25px;
     border: none;
+}
+
+.button-get-food {
     border-bottom: 4px solid rgb(95, 40, 69);
     border-radius: 5px;
     font-weight: 0.9em;
     font-weight: 700;
-    color: #fffafa;
+    color: var(--white-color-text);
     margin-right: 10px;
+    cursor: not-allowed;
     transition: background-color 0.3s linear;
 }
 
 .button-open-edit-foods {
     background-color: transparent;
-    border: none;
-    padding: 10px 25px;
     color: var(--black-color-text);
 }
 
@@ -226,35 +232,34 @@ main {
     text-decoration: underline;
 }
 
-
 .result-container {
     display: none;
-    width: 100%;
 }
 
 .result-header {
     margin-bottom: 25px;
 }
 
-.result-header div:nth-of-type(1) {
+.result-header p:nth-of-type(1) {
     font-size: 0.75em;
     color: var(--grey-color-text);
     margin-bottom: 2px;
 }
 
-.result-header div:nth-of-type(2) {
+.result-header p:nth-of-type(2) {
     font-size: 0.9em;
 }
 
-.result-header div:nth-of-type(2) span {
+.result-header p:nth-of-type(2) span {
     position: relative;
     top: -1px;
 }
 
 .selectable-foods {
-    opacity: 0;
     font-size: 1.1em;
     font-weight: 700;
+    opacity: 0;
+    color: var(--black-color-text);
 }
 
 .display-selectable-food {
@@ -313,7 +318,7 @@ main {
     }
 }
 
-.outcome-buttons {
+.result-buttons {
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -321,12 +326,12 @@ main {
     opacity: 0;
 }
 
-.display-outcome-buttons {
+.display-result-buttons {
     display: flex;
-    animation: display-outcome-buttons 1s linear forwards;
+    animation: display-result-buttons 0.7s linear forwards;
 }
 
-@keyframes display-outcome-buttons {
+@keyframes display-result-buttons {
     from { opacity: 0; }
     to { opacity: 1; }
 }
@@ -334,10 +339,10 @@ main {
 .button-retry {
     width: 180px;
     padding: 10px 0;
-    border: 2px solid rgba(159, 95, 128, 1);
+    border: 2px solid var(--main-color);
     border-radius: 50px;
-    background-color: rgba(159, 95, 128, 0.8);
-    color: #fffafa;
+    background-color: rgba(159, 95, 128, 0.85);
+    color: var(--white-color-text);
     font-weight: 700;
     font-size: 0.9em;
     margin-bottom: 25px;
@@ -346,7 +351,7 @@ main {
 
 .button-retry:hover,
 .button-retry:focus {
-    background-color: rgba(159, 95, 128, 1);
+    background-color: var(--main-color);
 }
 
 .button-reset-application {
@@ -358,7 +363,6 @@ main {
 .button-reset-application:focus {
     text-decoration: underline;
 }
-
 
 /* Adjust scroll when user is using desktop version (add media query) */
 .container-edit-foods {
@@ -377,8 +381,8 @@ main {
 }
 
 .content-edit-foods {
-    background-color: #9f5f80;
-    color: #fffafa;
+    background-color: var(--main-color);
+    color: var(--white-color-text);
     padding: 30px 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -426,7 +430,7 @@ main {
 .input-rename-food {
     padding: 6px 10px;
     font-size: 0.9em;
-    background-color: #ffffff;
+    background-color: #fff;
     border: 3px solid #5f2d47;
     border-radius: 5px;
 }
@@ -436,7 +440,7 @@ main {
     background-color: transparent;
     font-size: 1.8em;
     font-weight: 700;
-    color: #fffafa;
+    color: #fff;
 }
 
 .button-close-edit-foods {
@@ -446,12 +450,15 @@ main {
     border-radius: 10px;
     font-size: 0.9em;
     font-weight: 700;
-    border: 2px solid #fffafa;
+    border: 2px solid #fff;
     background-color: #5f2d47;
-    color: #fffafa;
+    color: #fff;
+    transition: background-color 0.3s linear;
 }
 
-
+.button-close-edit-foods:hover {
+    background-color: transparent;
+}
 
 .notification {
     display: none;
