@@ -62,8 +62,12 @@ header p {
     border-radius: 4px;
 }
 
-header p:last-of-type {
+header p:nth-of-type(2) {
     margin-top: 7px;
+}
+
+.header-one-liner {
+    display: none;
 }
 
 main {
@@ -116,9 +120,16 @@ main {
 }
 
 .start-button-text {
-    font-size: 1.05em;
+    margin-top: 20px;
+    font-size: 0.95em;
     font-weight: 700;
     color: var(--grey-color-text);
+    transition: color 0.3s linear;
+}
+
+.start-button-text:hover,
+.start-button-text:focus {
+    color: var(--black-color-text);
 }
 
 .main-container {
@@ -485,4 +496,120 @@ main {
         bottom: 30px;
         opacity: 1;
     }
+}
+
+/* Media queries */
+
+@media (min-width: 760px) {
+
+    header {
+        flex-direction: row;
+    }
+
+    header p {
+        font-size: 2.8em;
+    }
+
+    header p:nth-of-type(1),
+    header p:nth-of-type(2) {
+        display: none;
+    }
+
+    .header-one-liner {
+        display: block;
+    }
+
+    main {
+        width: 550px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .content-edit-foods {
+        padding: 30px 170px;
+    }
+
+    .editable-foods {
+        padding-left: 30px;
+    }
+
+}
+
+@media (min-width: 1200px) {
+
+    header {
+        height: 110px;
+        width: 600px;
+        margin: 0 auto;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
+    }
+
+    header p {
+        font-size: 2.2em;
+        border-radius: 8px;
+        padding: 2px 8px;
+    }
+
+    .header-one-liner {
+        position: relative;
+        top: -2px;
+    }
+
+    .start-button-image img {
+        width: 80px;
+    }
+
+    .start-button-image:before {
+        width: 80px;
+        height: 80px;
+        top: 12px;
+        left: -12px;
+    }
+
+    .form-add-food {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .content-edit-foods {
+        width: 610px;
+        margin: 0 auto;
+        padding: 30px 80px;
+    }
+
+    .editable-foods {
+        -ms-overflow-style: none;
+        scrollbar-width: auto;
+    }
+
+    .editable-foods::-webkit-scrollbar {
+        display: block;
+        width: 15px;
+        background-color: transparent;
+    }
+
+    .editable-foods::-webkit-scrollbar-thumb {
+        background-color: #5f2d47;
+        border-radius: 10px;
+    }
+
+    .editable-foods li {
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+
+}
+
+@media (min-width: 1700px) {
+
+    header {
+        height: 140px;
+    }
+
+    header p {
+        font-size: 2.5em;
+    }
+
 }

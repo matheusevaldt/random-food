@@ -47,6 +47,7 @@ buttonResetApplication.addEventListener('click', resetApplication);
 editableFoods.addEventListener('click', editFoods);
 buttonCloseEditFoods.addEventListener('click', closeEditFoods);
 
+// Enable the usage of the button 'buttonAddFood' only if user has inserted something in the 'inputAddFood' field.
 function statusButtonAddFood() {
     if (inputAddFood.value.length !== 0) {
         buttonAddFood.disabled = false;
@@ -55,6 +56,11 @@ function statusButtonAddFood() {
     }
 }
 
+// Whenever the user inserts a new food, do the following:
+// - Store the food's name and its id in the 'foods' variable.
+// - Update the amount of foods that the user has added.
+// - Update and display the list of foods that the user has added.
+// - If more than 1 food has been add, enable the usage of the 'buttonGetFood' button.
 function addFood() {
     appendFood();
     updateAmountOfFoods();
@@ -130,6 +136,7 @@ function statusButtonGetFood() {
     }
 }
 
+// 
 async function getFood() {
     if (foods.length === 1) return notifyUser();
     hideMainContainer();
