@@ -33,10 +33,6 @@ let idFood = 0;
 buttonAddFood.disabled = true;
 
 // Event listeners.
-buttonDisplayMainContainer.forEach(button => button.addEventListener('click', () => {
-    hideInitialContainer();
-    displayMainContainer();
-}));
 inputAddFood.addEventListener('input', statusButtonAddFood);
 buttonAddFood.addEventListener('click', event => event.preventDefault());
 buttonAddFood.addEventListener('click', addFood);
@@ -46,8 +42,12 @@ buttonRetry.addEventListener('click', retry);
 buttonResetApplication.addEventListener('click', resetApplication);
 editableFoods.addEventListener('click', editFoods);
 buttonCloseEditFoods.addEventListener('click', closeEditFoods);
+buttonDisplayMainContainer.forEach(button => button.addEventListener('click', () => {
+    hideInitialContainer();
+    displayMainContainer();
+}));
 
-// Enable the usage of the button 'buttonAddFood' only if user has inserted something in the 'inputAddFood' field.
+// Enable the usage of the 'buttonAddFood' button only if the user has inserted something in the 'inputAddFood' field.
 function statusButtonAddFood() {
     if (inputAddFood.value.length !== 0) {
         buttonAddFood.disabled = false;
@@ -136,14 +136,20 @@ function statusButtonGetFood() {
     }
 }
 
-// 
+// Whenever the user clicks in the 'buttonGetFood' button, do the following:
+// - Check if the user has only added one food. If this is the case, the user will be notified with a message on how to procede.
+// - If the user has inserted more than one food:
+// '--> First, display all the user's foods in the 'resultContainer'.
+// '--> After the previous step is complete, display a loading spinner.
+// '--> Once the loading spinner is done, display the food that has been randomly selected.
+// All these steps need to happen in an asynchronous way. Therefore, the usage of 'async and await' is necessary.
 async function getFood() {
     if (foods.length === 1) return notifyUser();
     hideMainContainer();
     displayResultContainer();
     await shuffleFoods();
     await loadSelectedFood();
-    await displaySelectedFood(2000);
+    await displaySelectedFood();
 }
 
 function notifyUser() {
@@ -178,7 +184,7 @@ async function loadSelectedFood() {
             selectableFoods.style.display = 'none';
             loadingFood.style.display = 'block';
             resolve();
-        }, 1000); // Execute this function X ms after the previous function has ended.
+        }, 1000);
     });
 }
 
@@ -200,6 +206,9 @@ async function displaySelectedFood() {
     });
 }
 
+// Whenever the user clicks in the 'buttonRetry' button, do the following:
+// - Discard the previous result.
+// - Do the same process again and display a new result.
 async function retry() {
     resetResultContainer();
     await shuffleFoods();
@@ -214,6 +223,11 @@ function resetResultContainer() {
     selectableFoods.classList.remove('display-selectable-food');
 }
 
+// Whenever the user clicks in the 'buttonResetApplication' button, do the following:
+// - Return to the 'initialContainer'.
+// - Clear the 'foods' variable.
+// - Reset the 'idFood' variable.
+// - Update the information in the 'mainContainer' regarding the user's list.
 function resetApplication() {
     resetResultContainer();
     hideResultContainer();
@@ -230,6 +244,7 @@ function openEditFoods() {
     displayEditableFoods();
 }
 
+// Reset and then display the foods that have been added to the user's list.
 function displayEditableFoods() {
     while (editableFoods.firstChild) {
         editableFoods.removeChild(editableFoods.firstChild);
@@ -237,6 +252,7 @@ function displayEditableFoods() {
     foods.forEach(food => createEditableFoods(food.id, food.food));
 }
 
+// Assign an input and a button to every food in the user's list.
 function createEditableFoods(id, food) {
     const content = `
         <li id="${id}">
@@ -247,6 +263,13 @@ function createEditableFoods(id, food) {
     editableFoods.insertAdjacentHTML('beforeend', content);
 }
 
+// Foods can be renamed and deleted.
+// Whenever the user clicks in a button that has the class 'button-delete-food', do the following:
+// - Remove from the 'foods' variable the food that has the same id that is presented in the button's parent element.
+// - Update the foods that can be renamed and deleted.
+// - If the deleted food was the last one in the 'foods' variable, display a message notifying the user that there are no more foods.
+// Whenever the user changes something in an input that has the class 'input-rename-food', do the following:
+// - Update the name of the food in the 'foods' variable that has the same id that is presented in the input's parent element.
 function editFoods(event) {
     const element = event.target;
     const elementId = element.parentElement.id;
@@ -255,6 +278,7 @@ function editFoods(event) {
         const foodsUpdated = foods.filter(food => food.id != elementId);
         foods = foodsUpdated;
         displayEditableFoods();
+        verifyAmountOfFoods();
     }
     if (interaction.includes('input-rename-food')) {
         const inputRenameFood = document.querySelectorAll('.input-rename-food');
@@ -269,6 +293,21 @@ function editFoods(event) {
     }
 }
 
+function verifyAmountOfFoods() {
+    if (foods.length === 0) {
+        const content = `
+            <p style="font-size: 0.9em; text-align: center;">
+                Your list of foods is currently empty.
+            </p>
+        `;
+        editableFoods.insertAdjacentHTML('beforeend', content);
+    }
+}
+
+// Whenever the user closes the 'containerEditFoods', do the following:
+// - Display the updated number of foods that are in the user's list.
+// - Display the updated name of the foods that are in the user's list.
+// - Update the status of the 'buttonGetFood' button.
 function closeEditFoods() {
     containerEditFoods.classList.remove('display-edit-foods');
     updateAmountOfFoods();

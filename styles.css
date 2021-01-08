@@ -375,7 +375,6 @@ main {
     text-decoration: underline;
 }
 
-/* Adjust scroll when user is using desktop version (add media query) */
 .container-edit-foods {
     display: none;
     position: absolute;
