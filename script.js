@@ -307,7 +307,7 @@ function verifyAmountOfFoods() {
 // Whenever the user closes the 'containerEditFoods', do the following:
 // - Display the updated number of foods that are in the user's list.
 // - Display the updated name of the foods that are in the user's list.
-// - Update the status of the 'buttonGetFood' button.
+// - Update the new status of the 'buttonGetFood' button.
 function closeEditFoods() {
     containerEditFoods.classList.remove('display-edit-foods');
     updateAmountOfFoods();
